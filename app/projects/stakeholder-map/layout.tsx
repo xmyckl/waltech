@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 
 const tools = [
   { href: '/projects/stakeholder-map', label: 'Overview' },
@@ -11,14 +12,30 @@ const tools = [
   { href: '/projects/stakeholder-map/decision-log', label: 'Decision Log' },
 ];
 
+function GovukStyles() {
+  useEffect(() => {
+    const existing = document.getElementById('govuk-styles');
+    if (existing) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/govuk-frontend.min.css';
+    link.id = 'govuk-styles';
+    document.head.appendChild(link);
+    return () => {
+      document.getElementById('govuk-styles')?.remove();
+    };
+  }, []);
+  return null;
+}
+
 export default function StakeholderLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
     <>
-      <link rel="stylesheet" href="/govuk-frontend.min.css" />
+      <GovukStyles />
 
-      {/* Sub-nav fixed just below the main waltech nav (which sits at top:16px, height:68px → bottom:84px) */}
+      {/* Sub-nav fixed just below the main waltech nav (top:16px + height:68px = bottom:84px) */}
       <div style={{
         position: 'fixed',
         top: '96px',
@@ -58,7 +75,7 @@ export default function StakeholderLayout({ children }: { children: React.ReactN
         </div>
       </div>
 
-      {/* Push content below both fixed navs: main nav bottom (84px) + sub-nav height (~48px) + gap */}
+      {/* Push content below both fixed navs */}
       <div style={{ paddingTop: '160px', background: '#f3f2f1', minHeight: '100vh' }}>
         <main id="main-content" className="govuk-main-wrapper">
           {children}
