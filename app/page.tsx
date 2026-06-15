@@ -1,65 +1,73 @@
-import Image from "next/image";
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import HeroTypewriter from '@/components/HeroTypewriter';
+
+export const metadata: Metadata = {
+  title: 'Michael Walters — Product Specialist',
+  description: 'Technically minded and delivery-focused Product Specialist based in Swansea, Wales.',
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <section id="hero" aria-label="Introduction">
+      <div className="container">
+        <div className="hero-inner">
+          <div>
+            <div className="hero-eyebrow anim">
+              <div className="hero-eyebrow-dot" />
+              <span className="hero-eyebrow-text">Open to new opportunities</span>
+            </div>
+
+            <h1 className="hero-name anim anim-delay-1">
+              Michael<br /><span className="highlight">Walters</span>
+            </h1>
+
+            <HeroTypewriter />
+
+            <p className="hero-tagline anim anim-delay-3">
+              <strong>Technically minded and delivery-focused.</strong> I&apos;m an organised, creative, and analytical thinker with a strong drive to meet objectives and deliver work to a high standard — adapting quickly to new technologies and bringing full commitment to every task.
+            </p>
+
+            <div className="hero-actions anim anim-delay-4">
+              <Link href="/experience" className="btn-primary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                </svg>
+                View experience
+              </Link>
+              <Link href="/contact" className="btn-secondary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+                </svg>
+                Get in touch
+              </Link>
+            </div>
+
+            <div className="hero-stats anim anim-delay-5">
+              <div>
+                <div className="hero-stat-value">7<span>+</span></div>
+                <div className="hero-stat-label">Years in tech</div>
+              </div>
+              <div>
+                <div className="hero-stat-value">4</div>
+                <div className="hero-stat-label">Promotions earned</div>
+              </div>
+              <div>
+                <div className="hero-stat-value">3</div>
+                <div className="hero-stat-label">Certifications</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="hero-avatar">
+            <div className="hero-avatar-ring" aria-hidden="true" />
+            <div className="hero-avatar-img">
+              <Image src="/pp.jpg" alt="Michael Walters" width={220} height={220} priority />
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+    </section>
   );
 }
