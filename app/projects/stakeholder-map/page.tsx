@@ -34,10 +34,7 @@ export default function StakeholderMapHome() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginTop: '2rem' }}>
         {tools.map(tool => (
           <Link key={tool.href} href={tool.href} style={{ textDecoration: 'none' }}>
-            <div className="govuk-inset-text" style={{ borderColor: '#1d70b8', cursor: 'pointer', transition: 'background 0.2s' }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#f3f2f1')}
-              onMouseLeave={e => (e.currentTarget.style.background = '')}
-            >
+            <div className="govuk-inset-text" style={{ borderColor: '#1d70b8', cursor: 'pointer' }}>
               <h2 className="govuk-heading-m" style={{ marginBottom: '0.5rem' }}>{tool.label}</h2>
               <p className="govuk-body" style={{ marginBottom: 0 }}>{tool.description}</p>
             </div>
