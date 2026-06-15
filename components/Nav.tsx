@@ -20,6 +20,7 @@ export default function Nav() {
         <li><Link href="/about" className={isActive('/about') ? 'active' : ''}>About</Link></li>
         <li><Link href="/skills" className={isActive('/skills') ? 'active' : ''}>Skills</Link></li>
         <li><Link href="/experience" className={isActive('/experience') ? 'active' : ''}>Experience</Link></li>
+        <li><Link href="/projects/stakeholder-map" className={isActive('/projects') ? 'active' : ''}>Projects</Link></li>
       </ul>
 
       <Link href="/contact" className={`nav-cta${isActive('/contact') ? ' active' : ''}`}>
