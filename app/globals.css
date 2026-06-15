@@ -48,7 +48,7 @@ body::before {
 }
 
 /* NAV */
-nav {
+nav.primary-nav {
   position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
   width: min(calc(100% - 32px), 920px); height: var(--nav-h);
   background: rgba(7,8,10,0.8); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
@@ -68,10 +68,10 @@ nav {
 @media (max-width: 700px) {
   .nav-links, .nav-cta { display: none; }
   .nav-mobile-toggle { display: block; }
-  nav.open { flex-wrap: wrap; height: auto; padding-bottom: 16px; }
-  nav.open .nav-links { display: flex; flex-direction: column; width: 100%; gap: 2px; order: 3; }
-  nav.open .nav-links a { padding: 10px 14px; font-size: 13px; }
-  nav.open .nav-cta { display: block; order: 4; width: 100%; text-align: center; margin-top: 8px; padding: 10px; }
+  nav.primary-nav.open { flex-wrap: wrap; height: auto; padding-bottom: 16px; }
+  nav.primary-nav.open .nav-links { display: flex; flex-direction: column; width: 100%; gap: 2px; order: 3; }
+  nav.primary-nav.open .nav-links a { padding: 10px 14px; font-size: 13px; }
+  nav.primary-nav.open .nav-cta { display: block; order: 4; width: 100%; text-align: center; margin-top: 8px; padding: 10px; }
 }
 
 /* SECTIONS */

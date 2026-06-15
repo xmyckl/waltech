@@ -13,7 +13,7 @@ export default function Nav() {
     href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
-    <nav role="navigation" aria-label="Primary" className={open ? 'open' : ''}>
+    <nav role="navigation" aria-label="Primary" className={`primary-nav${open ? ' open' : ''}`}>
       <Link href="/" className="nav-logo">MW<span>.dev</span></Link>
 
       <ul className="nav-links">
