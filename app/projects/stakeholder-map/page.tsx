@@ -22,6 +22,9 @@ export default function StakeholderMapHome() {
           <li className="govuk-breadcrumbs__list-item">
             <Link className="govuk-breadcrumbs__link" href="/">Home</Link>
           </li>
+          <li className="govuk-breadcrumbs__list-item">
+            <Link className="govuk-breadcrumbs__link" href="/projects">Projects</Link>
+          </li>
           <li className="govuk-breadcrumbs__list-item">Stakeholder Map</li>
         </ol>
       </div>
