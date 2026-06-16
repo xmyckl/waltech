@@ -21,8 +21,9 @@
   --nav-h:      68px;
 }
 
-html { scroll-behavior: smooth; }
-body:not(.govuk-template__body) { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+html { scroll-behavior: smooth; min-height: 100%; }
+body:not(.govuk-template__body) { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100svh; }
+body:not(.govuk-template__body) main { flex: 1; }
 body.govuk-template__body { background: #f3f2f1; overflow-x: hidden; }
 ::selection { background: var(--cyan); color: var(--bg); }
 ::-webkit-scrollbar { width: 4px; }
