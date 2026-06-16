@@ -15,6 +15,14 @@ const projects = [
     tags: ['Next.js', 'GOV.UK Design System', 'Supabase', 'TypeScript'],
     status: 'Live',
   },
+  {
+    href: '/projects/assessor-track',
+    title: 'AssessorTrack — Apprenticeship Assessment Tool',
+    description:
+      'A GOV.UK Design System–styled caseload management tool for apprenticeship assessors. Tracks learner progress, OTJ hours, KSB evidence, review schedules, and alerts across multiple programmes — designed to complement Tribal MAYTAS.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind', 'GOV.UK Design System'],
+    status: 'Live',
+  },
 ];
 
 export default function ProjectsIndex() {
