@@ -1,46 +1,42 @@
 'use client';
-import { useState } from 'react';
 import Link from 'next/link';
-import { alerts, learners, CURRENT_ASSESSOR_ID } from '@/lib/assessor-track/data';
+import { useAlerts, type AlertWithLearner } from '@/hooks/assessor-track/useAlerts';
+import { Breadcrumb } from '@/components/assessor-track/Breadcrumb';
+
+function AlertCard({ a }: { a: AlertWithLearner }) {
+  const isCrit = a.severity === 'critical';
+  return (
+    <div style={{ background: '#fff', borderRadius: 10, border: `1px solid ${isCrit ? '#fecaca' : '#fde68a'}`, borderLeft: `3px solid ${isCrit ? '#ef4444' : '#f59e0b'}`, padding: '16px 18px', marginBottom: 12 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, flexWrap: 'wrap' }}>
+        <div style={{ flex: 1 }}>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 8, flexWrap: 'wrap' }}>
+            <span className={`at-badge ${isCrit ? 'at-badge--red' : 'at-badge--amber'}`}>{isCrit ? 'Critical' : 'Warning'}</span>
+            {a.learner && (
+              <>
+                <Link href={`/projects/assessor-track/learners/${a.learner.id}`} className="at-link" style={{ fontSize: 14, fontWeight: 600 }}>{a.learner.name}</Link>
+                <span className="at-muted">&mdash; {a.learner.programme}</span>
+              </>
+            )}
+          </div>
+          <p style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#111827', margin: '0 0 5px' }}>{a.title}</p>
+          <p style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontSize: 14, color: '#6b7280', margin: 0 }}>{a.detail}</p>
+        </div>
+        <span className="at-muted" style={{ flexShrink: 0, whiteSpace: 'nowrap' }}>{a.createdAt}</span>
+      </div>
+    </div>
+  );
+}
 
 export default function Alerts() {
-  const [showAll, setShowAll] = useState(false);
-  const myIds = learners.filter(l => l.assessorId === CURRENT_ASSESSOR_ID).map(l => l.id);
+  const state = useAlerts();
 
-  const filtered = showAll ? alerts : alerts.filter(a => a.learnerId != null && myIds.includes(a.learnerId));
-  const critical = filtered.filter(a => a.severity === 'critical');
-  const warnings = filtered.filter(a => a.severity === 'warning');
+  if (!state) return null;
 
-  function AlertCard({ a }: { a: typeof alerts[number] }) {
-    const learner = a.learnerId ? learners.find(l => l.id === a.learnerId) : undefined;
-    const isCrit = a.severity === 'critical';
-    return (
-      <div style={{ background: '#fff', borderRadius: 10, border: `1px solid ${isCrit ? '#fecaca' : '#fde68a'}`, borderLeft: `3px solid ${isCrit ? '#ef4444' : '#f59e0b'}`, padding: '16px 18px', marginBottom: 12 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, flexWrap: 'wrap' }}>
-          <div style={{ flex: 1 }}>
-            <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 8, flexWrap: 'wrap' }}>
-              <span className={`at-badge ${isCrit ? 'at-badge--red' : 'at-badge--amber'}`}>{isCrit ? 'Critical' : 'Warning'}</span>
-              {learner && (
-                <Link href={`/projects/assessor-track/learners/${learner.id}`} className="at-link" style={{ fontSize: 14, fontWeight: 600 }}>{learner.name}</Link>
-              )}
-              {learner && <span className="at-muted">&mdash; {learner.programme}</span>}
-            </div>
-            <p style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#111827', margin: '0 0 5px' }}>{a.title}</p>
-            <p style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontSize: 14, color: '#6b7280', margin: 0 }}>{a.detail}</p>
-          </div>
-          <span className="at-muted" style={{ flexShrink: 0, whiteSpace: 'nowrap' }}>{a.createdAt}</span>
-        </div>
-      </div>
-    );
-  }
+  const { critical, warnings, showAll, setShowAll } = state;
 
   return (
     <div className="at-page">
-      <nav className="at-crumb">
-        <Link href="/projects/assessor-track">AssessorTrack</Link>
-        <span style={{ opacity: 0.4 }}>›</span>
-        <span>Alerts</span>
-      </nav>
+      <Breadcrumb items={[{ label: 'AssessorTrack', href: '/projects/assessor-track' }, { label: 'Alerts' }]} />
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12, marginBottom: 24 }}>
         <div>
@@ -90,7 +86,7 @@ export default function Alerts() {
         </section>
       )}
 
-      {filtered.length === 0 && (
+      {critical.length === 0 && warnings.length === 0 && (
         <div className="at-inset">No alerts for the current selection.</div>
       )}
     </div>

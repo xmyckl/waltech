@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { AssessorProvider } from '@/contexts/AssessorContext';
 
 const NAV_H = 68;
 const SIDEBAR_W = 232;
@@ -113,7 +114,7 @@ export default function AssessorTrackLayout({ children }: { children: React.Reac
   const pathname = usePathname();
 
   return (
-    <>
+    <AssessorProvider>
       <style dangerouslySetInnerHTML={{ __html: DS }} />
 
       {/* Sidebar */}
@@ -178,6 +179,6 @@ export default function AssessorTrackLayout({ children }: { children: React.Reac
       }}>
         {children}
       </div>
-    </>
+    </AssessorProvider>
   );
 }
